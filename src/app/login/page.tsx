@@ -8,25 +8,41 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (
-    e: React.FormEvent
-  ) => {
-    e.preventDefault();
+  e: React.FormEvent
+) => {
+  e.preventDefault();
 
-    const { data, error } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+  const { data, error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    console.log(data);
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
+  const user = data.user;
 
+  const { data: profile, error: profileError } =
+    await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+  if (profileError) {
+    alert("Profile tidak ditemukan");
+    return;
+  }
+
+  if (profile.role === "admin") {
+    window.location.href = "/admin";
+  } else {
     window.location.href = "/dashboard";
-  };
+  }
+};
 
   return (
     <main className="min-h-screen flex items-center justify-center">
