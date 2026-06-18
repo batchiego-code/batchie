@@ -27,6 +27,7 @@ export default function RegisterPage() {
     console.log(data);
 
     if (error) {
+        console.error(error);
       alert(error.message);
       return;
     }
