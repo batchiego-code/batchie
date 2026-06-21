@@ -11,23 +11,48 @@ export default function LoginPage() {
     useState("");
 
   const handleLogin = async (
-    e: React.FormEvent
-  ) => {
-    e.preventDefault();
+  e: React.FormEvent
+) => {
+  e.preventDefault();
 
-    const { error } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    alert("User not found");
+    return;
+  }
+
+  const { data: profile } =
+    await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+  if (!profile) {
+    alert("Profile not found");
+    return;
+  }
+
+  if (profile.role === "admin") {
+    window.location.href = "/admin";
+  } else {
     window.location.href = "/dashboard";
-  };
+  }
+};
 
   return (
     <main

@@ -36,6 +36,10 @@ export default function DashboardPage() {
       .single();
 
     setProfile(data);
+    if (data?.role === "admin") {
+  window.location.href = "/admin";
+  return;
+}
   }
 
   return (

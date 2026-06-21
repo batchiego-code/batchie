@@ -48,14 +48,64 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold">
-        Admin Dashboard
-      </h1>
+  <main
+    className="
+      min-h-screen
+      bg-[#f7f3ef]
+      p-8
+    "
+  >
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-8">
+        <p
+          className="
+            text-sm
+            text-[#6b5e5e]/60
+          "
+        >
+          Batchie Operations
+        </p>
 
-      <p className="mt-4">
-        Selamat datang Admin 🎉
-      </p>
-    </main>
-  );
+        <h1
+          className="
+            text-4xl
+            font-semibold
+            text-[#6b5e5e]
+          "
+        >
+          Admin Dashboard 🐿️
+        </h1>
+      </div>
+
+      <div
+        className="
+          rounded-[32px]
+          bg-white
+          p-8
+          shadow-lg
+        "
+      >
+        <h2
+          className="
+            text-2xl
+            font-semibold
+            text-[#6b5e5e]
+          "
+        >
+          Batch Management
+        </h2>
+
+        <p
+          className="
+            mt-2
+            text-[#6b5e5e]/70
+          "
+        >
+          Ready to manage batches,
+          orders, payments & shipments.
+        </p>
+      </div>
+    </div>
+  </main>
+);
 }
